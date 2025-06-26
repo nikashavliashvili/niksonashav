@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Receipt | City Mall</title>
+  <style>
+    body {
+      background: #1b2228;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      text-align: center;
+      padding-top: 100px;
+    }
+    .receipt {
+      background: #2e2b4a;
+      border-radius: 20px;
+      padding: 30px;
+      display: inline-block;
+      box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
+    }
+    h2 {
+      font-family: 'Playfair Display', serif;
+      color: #f3d1ff;
+    }
+    p {
+      font-size: 1.1rem;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="receipt">
+    <h2>🎟️ Ticket Receipt</h2>
+    <p><strong>Cinema:</strong> {{ cinema }}</p>
+    <p><strong>Language:</strong> {{ lang }}</p>
+    <p><strong>Time:</strong> {{ time }}</p>
+    <p><strong>Price:</strong> {{ price }} GEL</p>
+    <p><strong>Your Seat:</strong> {{ seat }}</p>
+    <br />
+    <a href="{{ url_for('newhome') }}" style="color:#a36edc; text-decoration: none;">← Back to Home</a>
+  </div>
+</body>
+</html>

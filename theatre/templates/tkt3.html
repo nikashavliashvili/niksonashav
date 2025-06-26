@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ｆ１ Ｔｉｃｋｅｔ | Cinema Galleria</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous" />
+
+  <!-- Google Fonts: Playfair Display + Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins&display=swap" rel="stylesheet" />
+
+  <style>
+    /* Flex layout for sticky footer */
+    html, body {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(135deg, #2c2a4a, #1b2228);
+      color: #f5f5f7;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* Main page content takes all space except footer */
+    #page-content {
+      flex: 1 0 auto;
+      padding-bottom: 20px;
+    }
+
+    /* Navbar */
+    .navbar {
+      background: rgba(30, 27, 57, 0.85);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+    }
+    .navbar-brand {
+      color: #f8e1f4 !important;
+      font-size: 1.8rem;
+      text-transform: uppercase;
+      user-select: none;
+      text-shadow: 0 0 8px #c678dd;
+    }
+    .navbar-nav .nav-link {
+      color: #d1c7f0;
+      font-weight: 600;
+      transition: color 0.3s ease;
+      text-transform: full-width;
+    }
+    .navbar-nav .nav-link:hover,
+    .navbar-nav .nav-link.active {
+      color: #f2e6ff;
+      text-shadow: 0 0 8px #bb86fc;
+    }
+    .dropdown-menu {
+      background: #3a2f59;
+      border-radius: 8px;
+      box-shadow: 0 0 10px #6a52a1;
+    }
+    .dropdown-item {
+      color: #ddd6ff;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .dropdown-item:hover {
+      background-color: #8c70d8;
+      color: white;
+      font-weight: 700;
+    }
+
+    /* Page title */
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 3rem;
+      margin: 2rem 0 1rem 0;
+      letter-spacing: 0.15em;
+      text-shadow: 0 0 10px #b185ff;
+      user-select: none;
+    }
+
+    /* Back button */
+    a.btn-secondary {
+      font-size: 20px;
+      margin-top: -45px;
+      border-radius: 30px;
+      padding: 10px 20px;
+      font-weight: 600;
+      background: linear-gradient(45deg, #7851a9, #a36edc);
+      border: none;
+      box-shadow: 0 5px 15px rgba(163, 110, 220, 0.7);
+      transition: background 0.4s ease;
+      user-select: none;
+      display: inline-block;
+    }
+    a.btn-secondary:hover {
+      background: linear-gradient(45deg, #a36edc, #7851a9);
+      box-shadow: 0 8px 20px rgba(163, 110, 220, 0.9);
+      text-decoration: none;
+      color: #fff;
+    }
+
+    /* Card container */
+    .card {
+      background: linear-gradient(145deg, #3c2a67, #4b3b8c);
+      border-radius: 20px;
+      border: none;
+      box-shadow: 0 8px 20px rgba(75, 59, 140, 0.7);
+      width: 280px !important;
+      margin: 1rem auto 2rem auto;
+      transition: transform 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(163, 110, 220, 0.9);
+    }
+
+    /* Card titles */
+    .card-title {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      color: #f3d1ff;
+      font-size: 1.6rem;
+      text-align: center;
+      margin-bottom: 1.3rem;
+      letter-spacing: 0.12em;
+      text-shadow: 0 0 8px #b185ff;
+      user-select: none;
+    }
+
+    /* Buttons inside cards */
+    .card-body button {
+      width: 100%;
+      background: #6a52a1;
+      color: #f2e6ff;
+      font-weight: 600;
+      border-radius: 15px;
+      padding: 12px 0;
+      margin-bottom: 15px;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      user-select: none;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      border: none;
+    }
+    .card-body button:hover {
+      background: #a36edc;
+      box-shadow: 0 10px 25px rgba(163, 110, 220, 0.8);
+      color: white;
+    }
+    .card-body p {
+      margin: 0;
+      user-select: none;
+    }
+
+    /* Footer */
+    footer {
+      flex-shrink: 0;
+      background: linear-gradient(135deg, #2c1b4a, #1b2231);
+      color: #e3d9ff;
+      padding: 2rem 1rem;
+      font-family: 'Poppins', sans-serif;
+      box-shadow: 0 -5px 15px rgba(75, 59, 140, 0.7);
+      user-select: none;
+      /* Removed position fixed */
+    }
+    footer h5 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #d1c7f0;
+      margin-bottom: 1rem;
+    }
+    footer p, footer a {
+      font-size: 0.9rem;
+      color: #cfc3ff;
+      transition: color 0.3s ease;
+      text-decoration: none;
+    }
+    footer a:hover {
+      color: #a36edc;
+      text-decoration: underline;
+    }
+    footer .container > .row > div {
+      margin-bottom: 1.5rem;
+    }
+    .copyright {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #a89edb;
+      padding-top: 0.7rem;
+      user-select: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="page-content">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">ＧＡＬＬＥＲＩＡ</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon" style="filter: invert(100%)"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">ＨＯＭＥ</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">ＳＨＯＰ</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                ＤＲＯＰ　ＤＯＷＮ
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><hr class="dropdown-divider" /></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </li>
+          </ul>
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+            <button class="btn btn-outline-light" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Title -->
+    <center><h1>ＴＩＣＫＥＴＳ</h1></center>
+    <a href="{{ url_for('newhome') }}" class="btn btn-secondary text-decoration-none">← Back</a>
+
+    <!-- Ticket Cards -->
+    <center>
+      <div class="card">
+  <div class="card-body">
+    <h5 class="card-title">ＧＡＬＬＥＲＩＡ</h5>
+    <form action="/receipt1" method="POST">
+      <input type="hidden" name="cinema" value="Galleria">
+      <input type="hidden" name="time" value="1:00">
+      <input type="hidden" name="lang" value="GEO">
+      <input type="hidden" name="price" value="9">
+      <button class="btn"><p>1. GEO - 1:00 - 9GEL</p></button>
+    </form>
+    <form action="/receipt3" method="POST">
+      <input type="hidden" name="cinema" value="Galleria">
+      <input type="hidden" name="time" value="3:00">
+      <input type="hidden" name="lang" value="GEO">
+      <input type="hidden" name="price" value="9">
+      <button class="btn"><p>2. GEO - 3:00 - 9GEL</p></button>
+    </form>
+    <form action="/receipt4" method="POST">
+      <input type="hidden" name="cinema" value="Galleria">
+      <input type="hidden" name="time" value="8:00">
+      <input type="hidden" name="lang" value="ENG">
+      <input type="hidden" name="price" value="10">
+      <button class="btn"><p>3. ENG - 8:00 - 10GEL</p></button>
+    </form>
+    <form action="/receipt5" method="POST">
+      <input type="hidden" name="cinema" value="Galleria">
+      <input type="hidden" name="time" value="00:00">
+      <input type="hidden" name="lang" value="ENG">
+      <input type="hidden" name="price" value="10">
+      <button class="btn"><p>4. ENG - 00:00 - 10GEL</p></button>
+    </form>
+  </div>
+</div>
+
+            <div class="card">
+  <div class="card-body">
+    <h5 class="card-title">ＥＡＳＴＰＯＩＮＴ</h5>
+    <form action="/receipt6" method="POST">
+      <input type="hidden" name="cinema" value="Eastpoint">
+      <input type="hidden" name="time" value="4:00">
+      <input type="hidden" name="lang" value="GEO">
+      <input type="hidden" name="price" value="11">
+      <button class="btn"><p>1. GEO - 4:00 - 11GEL</p></button>
+    </form>
+    <form action="/receipt7" method="POST">
+      <input type="hidden" name="cinema" value="Eastpoint">
+      <input type="hidden" name="time" value="7:00">
+      <input type="hidden" name="lang" value="GEO">
+      <input type="hidden" name="price" value="11">
+      <button class="btn"><p>2. GEO - 7:00 - 11GEL</p></button>
+    </form>
+    <form action="/receipt8" method="POST">
+      <input type="hidden" name="cinema" value="Eastpoint">
+      <input type="hidden" name="time" value="22:00">
+      <input type="hidden" name="lang" value="ENG">
+      <input type="hidden" name="price" value="12">
+      <button class="btn"><p>3. ENG - 22:00 - 12GEL</p></button>
+    </form>
+    <form action="/receipt9" method="POST">
+      <input type="hidden" name="cinema" value="Eastpoint">
+      <input type="hidden" name="time" value="01:00">
+      <input type="hidden" name="lang" value="ENG">
+      <input type="hidden" name="price" value="12">
+      <button class="btn"><p>4. ENG - 01:00 - 12GEL</p></button>
+    </form>
+  </div>
+</div>
+
+                  <div class="card">
+  <div class="card-body">
+    <h5 class="card-title">ＣＩＴＹ　ＭＡＬＬ</h5>
+    <form action="/receipt10" method="POST">
+      <input type="hidden" name="cinema" value="Eastpoint">
+      <input type="hidden" name="time" value="3:00">
+      <input type="hidden" name="lang" value="GEO">
+      <input type="hidden" name="price" value="10">
+      <button class="btn"><p>1. GEO - 3:00 - 10GEL</p></button>
+    </form>
+    <form action="/receipt11" method="POST">
+      <input type="hidden" name="cinema" value="Eastpoint">
+      <input type="hidden" name="time" value="7:00">
+      <input type="hidden" name="lang" value="GEO">
+      <input type="hidden" name="price" value="10">
+      <button class="btn"><p>2. GEO - 5:00 - 10GEL</p></button>
+    </form>
+    <form action="/receipt12" method="POST">
+      <input type="hidden" name="cinema" value="Eastpoint">
+      <input type="hidden" name="time" value="22:00">
+      <input type="hidden" name="lang" value="ENG">
+      <input type="hidden" name="price" value="11">
+      <button class="btn"><p>3. ENG - 7:00 - 11GEL</p></button>
+    </form>
+    <form action="/receipt13" method="POST">
+      <input type="hidden" name="cinema" value="Eastpoint">
+      <input type="hidden" name="time" value="01:00">
+      <input type="hidden" name="lang" value="ENG">
+      <input type="hidden" name="price" value="12">
+      <button class="btn"><p>4. ENG - 9:00 - 11GEL</p></button>
+    </form>
+  </div>
+</div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <!-- About -->
+        <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+          <h5>About Us</h5>
+          <p>
+            Welcome to our movie &amp; ticket hub. We bring cinema closer to you with easy booking and a great experience.
+          </p>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+          <h5>Quick Links</h5>
+          <ul class="list-unstyled mb-0">
+            <li><a href="{{ url_for('newhome') }}">Home</a></li>
+            <li><a href="{{ url_for('shop') }}">Shop</a></li>
+            <li><a href="/tickets">Tickets</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact -->
+        <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
+          <h5>Contact</h5>
+          <p>Email: nika.shavliashvili1@icloud.com</p>
+          <p>Phone: +995 551 109 887</p>
+          <p>Location: Tbilisi, Georgia</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="copyright mt-3">
+      © 2025 CinemaSite. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+</body>
+</html>

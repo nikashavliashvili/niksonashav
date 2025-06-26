@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Home | Cinema</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    body {
+      background-color: #0d1117;
+      color: #d0d6db;
+      font-family: 'Roboto', sans-serif;
+    }
+    .navbar {
+      background-color: #1f2937;
+      padding: 15px 30px;
+    }
+    .navbar-brand, .nav-link {
+      color: #f0f0f0 !important;
+      font-weight: bold;
+      font-family: 'Orbitron', sans-serif;
+      letter-spacing: 1px;
+    }
+    .nav-link:hover {
+      color: #00d9ff !important;
+      text-shadow: 0 0 8px #00d9ff;
+    }
+    .hero {
+      margin-top: 80px;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      font-family: 'Orbitron', sans-serif;
+      color: #ffffff;
+      text-shadow: 0 0 10px #00ffff;
+    }
+    .hero p {
+      font-size: 1.1rem;
+      color: #a5a5a5;
+    }
+    .btn-primary {
+      background-color: #00d9ff;
+      border: none;
+      font-weight: bold;
+    }
+    .btn-primary:hover {
+      background-color: #00bcd4;
+      box-shadow: 0 0 10px #00ffff;
+    }
+  </style>
+</head>
+<body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">ＣＩＮＥＭＡ</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="/">🏠 HOME</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('register') }}">👤 ＳＩＧＮ ＩＮ</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url_for('shop') }}">🛒 ＳＨＯＰ</a></li>
+      </ul>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search"/>
+        <button class="btn btn-outline-light" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO SECTION -->
+<div class="container hero">
+  <h1>🎬 Welcome to 𝒞𝐼𝒩𝐸𝑀𝒜</h1>
+  <p>Buy your favorite movie tickets in a single click. Experience the future of cinema!</p>
+  <a href="{{ url_for('shop') }}"><button class="btn btn-primary mt-3">Explore Tickets</button></a>
+</div>
+
+</body>
+</html>

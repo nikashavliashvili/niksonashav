@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cinema Shop</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #1b2228;
+      color: #ffffff;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .cart-info {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background: #333;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      z-index: 1000;
+    }
+
+    .cart-info button {
+      background: crimson;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .cart-info button:hover {
+      background: darkred;
+    }
+
+    .shop {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 25px;
+      margin-top: 70px;
+      margin-bottom: 40px; /* space below items before button */
+    }
+
+    /* Beautiful card styles */
+    .item {
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      border-radius: 20px;
+      padding: 15px;
+      text-align: center;
+      box-shadow: 0 6px 15px rgba(0, 255, 120, 0.25);
+      color: #d0f0c0;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 12px 30px rgba(0, 255, 120, 0.7);
+    }
+
+    .item img {
+      width: 100%;
+      border-radius: 15px;
+      height: 160px;
+      object-fit: cover;
+      box-shadow: 0 4px 12px rgba(0, 255, 120, 0.3);
+      margin-bottom: 12px;
+    }
+
+    .item-name {
+      font-weight: 700;
+      font-size: 1.3rem;
+      margin: 10px 0 6px;
+      text-shadow: 0 0 5px #00ff73;
+    }
+
+    .item-price {
+      color: #00ff73;
+      font-weight: 600;
+      margin-bottom: 15px;
+      font-size: 1.1rem;
+    }
+
+    .item button {
+      padding: 10px 20px;
+      background: #00ff73;
+      color: #022;
+      font-weight: 700;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 0 8px #00ff73;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    .item button:hover {
+      background: #00cc59;
+      color: #e0ffe0;
+      box-shadow: 0 0 15px #00ff73, 0 0 20px #00ff73;
+    }
+
+    /* Buy All button placed below shop items, natural flow */
+    .buy-section {
+      max-width: 400px;
+      margin: 0 auto 50px; /* center horizontally with bottom margin */
+      text-align: center;
+    }
+
+    .buy-btn {
+      background: linear-gradient(to right, #00c853, #64dd17);
+      border: none;
+      padding: 15px 50px;
+      font-size: 22px;
+      font-weight: 700;
+      color: white;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 12px rgba(0,255,100,0.6);
+      user-select: none;
+    }
+
+    .buy-btn:hover {
+      background: linear-gradient(to right, #00e676, #76ff03);
+      box-shadow: 0 0 25px rgba(0,255,100,0.9);
+      transform: scale(1.08);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="cart-info">
+    🛒 Cart: <span id="cart-count">0</span> items |
+    💰 Total: <span id="cart-total">0</span>₾
+    <button onclick="clearCart()">Clear Cart</button>
+  </div>
+
+  <h1>🍿 Welcome to the Cinema Shop</h1>
+
+  <div class="shop" id="shop">
+    <!-- Items will be injected here -->
+  </div>
+
+  <!-- Buy button BELOW all content -->
+  <div class="buy-section">
+    <button class="buy-btn" onclick="checkout()">🎟 Buy All Now</button>
+  </div>
+
+<script>
+  const items = [
+   
+   { name: "Popcorn", price: 10, },
+    { name: "Coca-Cola", price: 5,  },
+    { name: "Nachos", price: 8},
+    { name: "Hot Dog", price: 7 },
+    { name: "Ice Cream", price: 4 },
+    { name: "Candy", price: 3 },
+    { name: "Water", price: 2 },
+    { name: "Chips", price: 4 },
+    { name: "Chocolate", price: 5 },
+    { name: "Juice", price: 6 }
+  ];
+
+  let cart = { count: 0, total: 0 };
+
+  const shop = document.getElementById("shop");
+  const cartCount = document.getElementById("cart-count");
+  const cartTotal = document.getElementById("cart-total");
+
+  items.forEach(item => {
+    const itemDiv = document.createElement("div");
+    itemDiv.className = "item";
+    itemDiv.innerHTML = `
+      
+      <div class="item-name">${item.name}</div>
+      <div class="item-price">${item.price}₾</div>
+      <button onclick='buyItem(${JSON.stringify(item)})'>Buy</button>
+    `;
+    
+    shop.appendChild(itemDiv);
+  });
+
+  function buyItem(item) {
+    cart.count += 1;
+    cart.total += item.price;
+    cartCount.textContent = cart.count;
+    cartTotal.textContent = cart.total;
+  }
+
+  function clearCart() {
+    cart.count = 0;
+    cart.total = 0;
+    cartCount.textContent = "0";
+    cartTotal.textContent = "0";
+  }
+
+  function checkout() {
+    if (cart.count === 0) {
+      alert("Your cart is empty!");
+      return;
+    }
+    localStorage.setItem("cartCount", cart.count);
+    localStorage.setItem("cartTotal", cart.total);
+    window.location.href = "/receipt"; // adjust as needed
+  }
+</script>
+
+</body>
+</html>

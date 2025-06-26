@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cinema</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    /* Base background and text color */
+    html, body {
+      height: 100%;
+      margin: 0;
+      background-color: #1b2228; /* Dark ticket-like bg */
+      color: #e0e3e7; /* Light text, softer white */
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    body {
+      /* flex container for page layout */
+      display: flex;
+      flex-direction: column;
+    }
+
+    nav {
+      flex-shrink: 0;
+      background-color: #232b35; /* slightly lighter dark for nav */
+      box-shadow: 0 2px 8px rgba(0,0,0,0.7);
+    }
+
+    .navbar-brand, .nav-link {
+      color: #f4f6f8 !important; /* bright but soft white */
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+    .nav-link:hover {
+      color: #a3c9ff !important; /* subtle cool blue hover */
+    }
+
+    main {
+      flex: 1 0 auto;
+      padding: 1.5rem 1rem;
+    }
+
+    /* Cards like your tickets */
+    .card {
+      background-color: #222b37; /* dark slate-blue tone */
+      border: none;
+      color: #d9dfe8;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.9);
+      transition: transform 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(16, 78, 233, 0.8);
+    }
+    .card-title {
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #acc8ff;
+      font-family: 'Segoe UI Black', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .card-text {
+      color: #bec8db;
+      font-size: 0.95rem;
+      margin-bottom: 0.7rem;
+    }
+
+    button.btn-secondary {
+      background-color: #3a4770;
+      border: none;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      transition: background-color 0.25s ease;
+    }
+    button.btn-secondary:hover {
+      background-color: #2a3654;
+      color: #a3c9ff;
+    }
+
+    footer {
+      flex-shrink: 0;
+      background-color: #232b35;
+      color: #c0c7d1;
+      padding: 2rem 1rem;
+      box-shadow: 0 -3px 12px rgba(0, 0, 0, 0.8);
+      font-size: 0.9rem;
+    }
+    footer h5 {
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #a3c9ff;
+      margin-bottom: 1rem;
+    }
+    footer p, footer a {
+      color: #bec8db;
+      text-decoration: none;
+    }
+    footer a:hover {
+      color: #acc8ff;
+      text-decoration: underline;
+    }
+    footer .row > div {
+      margin-bottom: 1.5rem;
+      text-align: left;
+    }
+    .copyright {
+      color: #8f9bb3;
+      padding-top: 0.7rem;
+      font-size: 0.8rem;
+      text-align: center;
+      user-select: none;
+    }
+
+    /* Carousel image fix */
+    .carousel-inner img {
+      border-radius: 15px;
+      box-shadow: 0 6px 15px rgba(16, 78, 233, 0.6);
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">HOME</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="#">ＣＩＮＥＭＡ</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('register') }}">  ＳＩＧＮ　ＩＮ 👤</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('frshop') }}">ＳＨＯＰ 🛒</a></li>
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container mt-3">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Carousel -->
+    <div id="carouselExampleIndicators" class="carousel slide mb-4">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="{{ url_for('static', filename='css/img/f1lg.webp') }}" class="d-block w-100" alt="Photo" height="290" />
+        </div>
+        <div class="carousel-item">
+          <img src="{{ url_for('static', filename='css/img/httyd.jpg') }}" class="d-block w-100" alt="Photo" height="290" />
+        </div>
+        <div class="carousel-item">
+          <img src="{{ url_for('static', filename='css/img/cobrakai.jpg') }}" class="d-block w-100" alt="Photo" height="290" />
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev" aria-label="Previous">
+        <span class="carousel-control-prev-icon"></span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next" aria-label="Next">
+        <span class="carousel-control-next-icon"></span>
+      </button>
+    </div>
+
+    <!-- Movies -->
+    <div class="row g-4">
+      <div class="col-md-3">
+        <div class="card p-3">
+          <img src="{{ url_for('static', filename='css/img/elio.jpeg') }}" class="img-fluid rounded mb-2" alt="Elio" />
+          <h5 class="card-title">Elio</h5>
+          <p class="card-text">adventures, movie</p>
+          
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card p-3">
+          <img src="{{ url_for('static', filename='css/img/f1.jpg') }}" class="img-fluid rounded mb-2" alt="F1" />
+          <h5 class="card-title">F1</h5>
+          <p class="card-text">Drama, Cinema</p>
+          
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card p-3">
+          <img src="{{ url_for('static', filename='css/img/megan.jpeg') }}" class="img-fluid rounded mb-2" alt="Megan" />
+          <h5 class="card-title">MEGAN</h5>
+          <p class="card-text">Scary, Movie</p>
+          
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card p-3">
+          <img src="{{ url_for('static', filename='css/img/drago.jpg') }}" class="img-fluid rounded mb-2" alt="HTTYD" />
+          <h5 class="card-title">HTTYD</h5>
+          <p class="card-text">Adventurous, Movie</p>
+         
+        </div>
+      </div>
+    </div>
+
+    <div class="row g-4 mt-3 mb-5">
+      <div class="col-md-3">
+        <div class="card p-3">
+          <img src="{{ url_for('static', filename='css/img/smurf bro.jpg') }}" class="img-fluid rounded mb-2" alt="Smurf" />
+          <h5 class="card-title">SMURF</h5>
+          <p class="card-text">Kids, movie</p>
+          
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card p-3">
+          <img src="{{ url_for('static', filename='css/img/dinosaur.jpg') }}" class="img-fluid rounded mb-2" alt="Jurassic Park" />
+          <h5 class="card-title">JURASIK PARK</h5>
+          <p class="card-text">Scary, Cinema</p>
+          
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card p-3">
+          <img src="{{ url_for('static', filename='css/img/superman.jpg') }}" class="img-fluid rounded mb-2" alt="Superman" />
+          <h5 class="card-title">SUPERMAN</h5>
+          <p class="card-text">Adventures, Movie</p>
+          
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card p-3">
+          <img src="{{ url_for('static', filename='css/img/badboys.jpg') }}" class="img-fluid rounded mb-2" alt="Bad Boys 2" />
+          <h5 class="card-title">BAD BOYS 2</h5>
+          <p class="card-text">Kids, Movie</p>
+          
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="row">
+        <!-- About -->
+        <div class="col-lg-4 col-md-6 mb-4 mb-md-0 text-start">
+          <h5>About Us</h5>
+          <p>Welcome to our movie &amp; ticket hub. We bring cinema closer to you with easy booking and a great experience.</p>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="col-lg-4 col-md-6 mb-4 mb-md-0 text-start">
+          <h5>Quick Links</h5>
+          <ul class="list-unstyled mb-0">
+            <li><a href="{{ url_for('newhome') }}">Home</a></li>
+            <li><a href="{{ url_for('shop') }}">Shop</a></li>
+            <li><a href="/tickets">Tickets</a></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact -->
+        <div class="col-lg-4 col-md-12 mb-4 mb-md-0 text-start">
+          <h5>Contact</h5>
+          <p>Email: nika.shavliashvili1@icloud.com</p>
+          <p>Phone: +995 551 109 887</p>
+          <p>Location: Tbilisi, Georgia</p>
+        </div>
+      </div>
+    </div>
+    <div class="copyright mt-3">
+      © 2025 CinemaSite. All rights reserved.
+    </div>
+  </footer>
+
+</body>
+</html>
